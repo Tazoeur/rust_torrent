@@ -7,6 +7,9 @@ pub struct Int {
 }
 
 impl Int {
+    pub fn new(value: i64) -> Int {
+        Int { value }
+    }
     pub fn encode(&self) -> String {
         Int::encode_from_value(self.value)
     }
@@ -20,7 +23,6 @@ impl Int {
         lazy_static! {
             static ref RE: Regex = Regex::new(r"^i(?P<value>(-?[1-9][0-9]*)|0)e$").unwrap();
         }
-        // let RE = regex::Regex::new(r"^i(?<value>(-?[1-9][0-9]*)|0)e$").unwrap();
 
         if let Some(capture) = RE.captures(content) {
             let value = capture
@@ -42,10 +44,6 @@ impl Int {
 
     pub fn set_value(&mut self, value: i64) {
         self.value = value;
-    }
-
-    pub fn new(value: i64) -> Int {
-        Int { value }
     }
 }
 
